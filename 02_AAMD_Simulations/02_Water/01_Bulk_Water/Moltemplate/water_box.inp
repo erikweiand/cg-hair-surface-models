@@ -1,0 +1,13 @@
+tolerance  3.0
+seed       234
+
+# output file type
+filetype xyz
+
+# output file name
+output system.xyz
+
+structure water.xyz
+  number 2135
+  inside box  0.0  0.0  0.0  40.0  40.0  40.0 
+end structure

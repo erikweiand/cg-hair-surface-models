@@ -1,0 +1,39 @@
+# General settings
+# E. Weiand - 01/2022
+
+units           real
+
+atom_style      full
+bond_style      harmonic
+angle_style     cosine/squared
+dihedral_style  none
+improper_style  none
+
+# a hybrid pairstyle is necessary to couple the lj/gromacs style 
+# with the long range electrostatics solver
+pair_style      hybrid/overlay lj/gromacs 9 12 coul/long 12 	# inner outer (LJ), rcut (Coulombic)
+
+# turn off LJ/Coulombic interactions between bonded neighbors but not for 1-3 (LJ), 1-4 neighbors (LJ/Coul)
+special_bonds   lj 0 1 1 coul 0 0 1
+
+# relative dielectric constant 
+# (polarizable water model)
+dielectric      2.5
+
+# neighbor list updates
+neigh_modify    every 5 	# change to "every 1 delay 0 check yes" 
+				# for initial convergence problems
+
+# non-periodic box in z
+boundary   	p p f
+
+# Slab PPPM settings
+kspace_style	pppm 1.0e-5
+kspace_modify	mesh 180 160 128
+kspace_modify   slab 3.0
+
+# runtime variables
+variable        Nrun   		equal 2000000	# total runtime, 10 ns, increase if necessary
+variable        Ndump  		equal 10000	# dump frequency
+variable        Nrestart  	equal 50000	# restart frequency
+variable        ts     		equal 5.0	# timestep size (avoid increasing above 5.0!)

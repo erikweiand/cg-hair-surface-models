@@ -1,0 +1,33 @@
+# file "spce_water.lt" 
+#
+# SPC/E water
+#
+#    H1     H2
+#      \   /
+#        O
+#
+
+SPCE {
+
+  write("Data Atoms") {
+    $atom:H2 $mol:. 71  0.4238 -0.8164904 0.57736 0.000000
+    $atom:O  $mol:. 70 -0.8476  0.0000000 0.00000 0.000000
+    $atom:H1 $mol:. 71  0.4238  0.8164904 0.57736 0.000000
+  }
+
+  write_once("Data Masses") {
+    @atom:O 15.9994
+    @atom:H 1.008
+  }
+
+  write("Data Bonds") {
+    $bond:OH1 68 $atom:O $atom:H1
+    $bond:OH2 68 $atom:O $atom:H2
+  }
+
+  write("Data Angles") {
+    $angle:HOH 131 $atom:H1 $atom:O $atom:H2
+  }
+
+} # end of definition of "spce_water" molecule type
+

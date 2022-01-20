@@ -1,0 +1,8 @@
+# Force field parameters and molecule/atom groups
+# E. Weiand - 01/2022
+
+# group definitions
+group Cgraphene		type 24 69
+
+# LJ self-interactions are directly defined in the .data file,
+# and binary interactions are calculated from geometric mixing. 

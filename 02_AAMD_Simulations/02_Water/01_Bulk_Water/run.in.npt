@@ -1,0 +1,41 @@
+# load general settings
+include         "system.in.init"
+
+# load topology
+read_data       "system_after_min.data"		# comment for restarting
+#read_restart	"restart.*.nvt"			# uncomment for restarting
+
+# load force field parameters and groups
+include         "system.in.settings"
+
+# trajectory dump settings
+dump            1 all custom ${Ndump} traj_nvt.lammpstrj id mol type x y z ix iy iz
+
+# impose initial Gaussian velocity profile (optional)
+velocity        water create 300.0 153513 rot yes dist gaussian
+
+# constrain SPC/E water bonds and angles
+fix 		fxshk water shake 0.0001 20 1000 b 68 a 131
+
+# barostatting/thermostatting
+fix 		fxnpt water npt temp 298.15 298.15 1000.0 iso 1.0 1.0 2000.0
+
+# set console output and frequency
+thermo_style    custom step temp pe etotal press vol epair #ebond eangle edihed
+thermo          100  # time interval for printing out "thermo" data
+
+# write intermediate (binary) restart files
+restart		${Nrestart} restart.*.nvt
+
+# constrain mean movement for a short time
+fix 		fxmom water momentum 10 linear 1 1 1 rescale
+timestep	1.0
+run		100000
+unfix		fxmom
+
+# set timestep and integrate
+timestep        ${ts}
+run		${Nrun}
+
+# write full data file
+write_data  	system_after_npt.data

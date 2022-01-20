@@ -1,0 +1,21 @@
+# load general settings
+include         "system.in.init"
+
+# load topology
+read_data       "monolayer.data"
+
+# load force field parameters and groups
+include         "system.in.settings"
+
+# trajectory dump settings (optional)
+#dump            1 all custom 1000 traj_min.lammpstrj id mol type x y z ix iy iz
+
+# freeze graphene atoms
+fix 		freezeC Cgraphene setforce 0.0 0.0 0.0
+
+# set print timestep and perform energy minimization
+thermo 		1
+minimize 	0 1e-8 10000 10000
+
+# write full data file (required for subsequent NVT runs!)
+write_data  system_after_min.data

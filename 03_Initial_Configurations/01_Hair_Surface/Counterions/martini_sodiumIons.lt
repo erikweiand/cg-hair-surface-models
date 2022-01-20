@@ -1,0 +1,14 @@
+# file "martini_sodiumIons.lt" 
+# non-polarizable MARTINI sodium ions
+
+MARTINISODIUM {
+
+  write("Data Atoms") {
+    $atom:NAC  $mol:. 7  1.0000  0.0000000 0.00000 0.000000
+  }
+
+  write_once("Data Masses") {
+    @atom:NAC 72.0
+  }
+
+} # end of definition of "martini_sodiumIon" molecule type

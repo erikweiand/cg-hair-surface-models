@@ -1,0 +1,8 @@
+import "spce_water.lt"
+wat  =  new SPCE  [2135]
+
+write_once("Data Boundary") {
+  0 40 xlo xhi
+  0 40 ylo yhi
+  0 40 zlo zhi
+}

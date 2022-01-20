@@ -1,0 +1,31 @@
+# file "hexadecane.lt"
+#
+#   C1-C1-C1-C1
+#
+
+HEXADECANE {
+
+  write("Data Atoms") {
+    $atom:C1 $mol:. 6  0  0.0000000 0.00000 0.000000
+    $atom:C2  $mol:. 6  0  4.7000000 0.00000 0.000000
+    $atom:C3 $mol:. 6  0  9.4000000 0.00000 0.000000
+    $atom:C4 $mol:. 6  0  14.100000 0.00000 0.000000
+  }
+
+  write_once("Data Masses") {
+    @atom:C1 72.0
+  }
+
+  write("Data Bonds") {
+    $bond:CC1 1 $atom:C1 $atom:C2
+    $bond:CC2 1 $atom:C2 $atom:C3
+    $bond:CC3 1 $atom:C3 $atom:C4
+  }
+
+  write("Data Angles") {
+    $angle:CCC1 1 $atom:C1 $atom:C2 $atom:C3
+    $angle:CCC2 1 $atom:C2 $atom:C3 $atom:C4
+  }
+
+} # end of definition of "hexadecane" molecule type
+

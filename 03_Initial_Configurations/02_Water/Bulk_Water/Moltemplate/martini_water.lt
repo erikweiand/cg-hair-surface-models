@@ -1,0 +1,32 @@
+# file "martini_water.lt" 
+#
+# polarizable MARTINI water
+#
+#    H1     H2
+#      \   /
+#        O
+
+MARTINIWATER {
+
+  write("Data Atoms") {
+    $atom:H2 $mol:. 6 -0.4600 -1.2000000 0.00000 0.000000
+    $atom:O  $mol:. 5  0.0000  0.0000000 0.00000 0.000000
+    $atom:H1 $mol:. 6  0.4600  1.2000000 0.00000 0.000000
+  }
+
+  write_once("Data Masses") {
+    @atom:O 24.0
+    @atom:H 24.0
+  }
+
+  write("Data Bonds") {
+    $bond:OH1 2 $atom:O $atom:H1
+    $bond:OH2 2 $atom:O $atom:H2
+  }
+
+  write("Data Angles") {
+    $angle:HOH 2 $atom:H1 $atom:O $atom:H2
+  }
+
+} # end of definition of "martini_water" molecule type
+

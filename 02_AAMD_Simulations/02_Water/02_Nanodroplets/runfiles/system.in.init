@@ -1,0 +1,34 @@
+# General settings
+# E. Weiand - 01/2022
+
+units           real
+
+# OPLS force field potentials
+atom_style      full
+bond_style      harmonic
+angle_style     cosine/squared
+dihedral_style  opls
+improper_style  cvff
+pair_style      lj/cut/coul/long 14.0 9.0
+pair_modify	mix geometric
+special_bonds	lj/coul 0.0 0.0 0.5
+
+# relative dielectric constant 
+dielectric      1.0
+
+# neighbor list updates
+neigh_modify    every 5 	# change to "every 1 delay 0 check yes" 
+				# for initial convergence problems
+#neighbor	2.5 bin
+
+# fully periodic system
+boundary   	p p p
+
+# PPPM settings
+kspace_style	pppm 1e-5
+
+# runtime variables
+variable        Nrun   		equal 2000000	# total runtime, 10 ns, increase if necessary
+variable        Ndump  		equal 10000	# dump frequency
+variable        Nrestart  	equal 50000	# restart frequency
+variable        ts     		equal 2.0	# timestep size (remember, this is AAMD, not CGMD!)

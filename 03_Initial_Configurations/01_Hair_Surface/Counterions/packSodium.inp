@@ -1,0 +1,13 @@
+tolerance  3.0
+seed       123
+
+# output file type
+filetype xyz
+
+# output file name
+output system.xyz
+
+structure sodium.xyz
+  number 756 # adjust to balance surface charges
+  inside box  0.0  0.0  36.0  357.336  309.462  50.0 
+end structure

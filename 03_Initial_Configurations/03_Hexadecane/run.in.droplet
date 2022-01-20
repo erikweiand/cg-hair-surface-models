@@ -1,0 +1,20 @@
+# load general settings
+include         "system.in.init"
+
+# load equilibrated bulk water topology
+read_data       "system_after_npt.data"
+
+# load force field parameters and groups
+include         "system.in.settings"
+
+# tile system if box is smaller than droplet diameter
+#replicate 2 2 1
+
+# define hemisphere (x0, y0, z0=0, r)
+region cropped sphere 105 105 0 100.63 side out
+
+# delete molecules outside hemisphere
+delete_atoms region cropped bond yes mol yes
+
+# write to file
+write_data  water_droplet.data

@@ -1,0 +1,86 @@
+# Force field parameters and molecule/atom groups
+# E. Weiand - 01/2022
+
+# Bead type assigment:
+# 1: C1 (lipid chain)
+# 2: C5 (lipid base)
+# 3: P5 (amine/carboxyl)
+# 4: C1 (graphene)
+# 5: POL (central water bead)
+# 6: POL (satellite water beads)
+# 7: Qd (sodium counterion with 1st hydration shell)
+# 8: currently unused (placeholder for polarizable ions later)
+# 9: ghost beads for grafting lipids onto graphene
+# 10: C1 (lipid terminal bead)
+# 11: Qa (cysteic acid)
+
+# group definitions
+group Cgraphene type 4 9
+group fattyAcid type 1 2 3 10 11
+group water     type 5 6
+group sodium	type 7
+
+# Coulombic interactions
+pair_coeff * *  coul/long
+
+# lipid interactions
+pair_coeff 1 1  lj/gromacs 0.8359606382000 4.7 	# C1-C1: IV
+pair_coeff 1 2  lj/gromacs 0.7404222795000 4.7 	# C1-C5: V
+pair_coeff 1 3  lj/gromacs 0.4776917933000 4.7 	# C1-P5: VIII
+pair_coeff 1 4  lj/gromacs 0.8359606382000 4.7 	# C1-C1: IV
+pair_coeff 2 2  lj/gromacs 0.8359606382000 4.7 	# C5-C5: IV
+pair_coeff 2 3  lj/gromacs 0.7404222795000 4.7 	# C5-P5: V
+pair_coeff 2 4  lj/gromacs 0.7404222795000 4.7 	# C5-C1: V
+pair_coeff 3 3  lj/gromacs 1.3375370210000 4.7 	# P5-P5: O
+pair_coeff 3 4  lj/gromacs 0.4776917933000 4.7 	# P5-C1: VIII
+pair_coeff 4 4  lj/gromacs 0.8359606382000 4.7 	# C1-C1: IV
+
+# water self-interactions
+pair_coeff 5 5  lj/gromacs 0.9553835865000 4.7	# No coul between WP/WM in same molecule (see special bonds in .init file)
+
+# sodium self-interactions
+pair_coeff 7 7  lj/gromacs 0.8359606382000 4.7	# Qd-Qd: IV (Yesylevskyy)
+
+# central water bead interactions with other beads
+pair_coeff 1 5  lj/gromacs 0.4538072036000 4.7	# POL-C1: VIII effectively
+pair_coeff 2 5  lj/gromacs 0.7034011656000 4.7	# POL-C5: V effectively
+pair_coeff 3 5  lj/gromacs 1.2706601700000 4.7	# POL-P5: O effectively
+pair_coeff 4 5  lj/gromacs 0.4538072036000 4.7	# POL-C1: VIII effectively
+
+# sodium interactions with other beads
+pair_coeff 1 7  lj/gromacs 0.5493455622000 4.7	# Qd-C1: VII effectively
+pair_coeff 2 7  lj/gromacs 0.8359606382000 4.7	# Qd-C5: IV effectively
+pair_coeff 3 7  lj/gromacs 1.3375370210000 4.7	# Qd-P5: O effectively
+pair_coeff 4 7  lj/gromacs 0.5493455622000 4.7	# Qd-C1: VIII effectively
+
+# interaction between water (POL) and sodium (Qd)
+pair_coeff 5 7  lj/gromacs 1.1942294830000 4.7	# POL-Qd: I effectively
+
+# FA tailgroup interactions (C1/C2)
+pair_coeff 1 10  lj/gromacs 0.8359606382000     4.7     # C1-C1: IV
+pair_coeff 2 10  lj/gromacs 0.7404222795000     4.7     # C1-C5: V
+pair_coeff 3 10  lj/gromacs 0.4776917933000     4.7     # P5-C1: VIII
+pair_coeff 4 10  lj/gromacs 0.8359606382000     4.7     # C1-C1: IV
+pair_coeff 5 10  lj/gromacs 0.4538072036000     4.7     # POL-C1: VIII effectively
+pair_coeff 7 10  lj/gromacs 0.5493455622000     4.7     # Qd-C1: VII effectively
+pair_coeff 10 10 lj/gromacs 0.8359606382000     4.7     # C1-C1: IV
+
+# cysteic acid interactions (Qa) 
+pair_coeff 1 11  lj/gromacs 0.5493455622000	4.7 	# C1-Qa: VII effectively
+pair_coeff 2 11  lj/gromacs 0.8359606382000	4.7 	# C5-Qa: IV effectively
+pair_coeff 3 11  lj/gromacs 1.3375370210000	4.7 	# P5-Qa: O effectively
+pair_coeff 4 11  lj/gromacs 0.5493455622000	4.7 	# C1-Qa: VII effectively
+pair_coeff 5 11  lj/gromacs 1.1942294830000	4.7	# POL-Qa: I effectively
+pair_coeff 7 11  lj/gromacs 0.9553835865000	4.7	# Qd-Qa: III effectively
+pair_coeff 10 11 lj/gromacs 0.5493455622000	4.7 	# C1-Qa: VII effectively
+pair_coeff 11 11 lj/gromacs 0.8359606382000	4.7 	# Qa-Qa: IV effectively
+
+# bond potentials
+bond_coeff 1              1.4937858508604 4.7 	# lipids/cysteic acid
+bond_coeff 2              1000000000      1.4	# water beads (Kb has no meaning since SHAKE is used
+bond_coeff 3              1000000000      1.4	# polarizable sodium beads (currently not used)
+
+# angle potentials
+angle_coeff 1             2.9875717017208 180	# checked
+angle_coeff 2             0.5019126       0	# water beads
+angle_coeff 3             0.5019126       0	# polarizable sodium beads (currently not used)

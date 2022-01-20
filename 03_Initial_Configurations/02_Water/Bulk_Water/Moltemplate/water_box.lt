@@ -1,0 +1,9 @@
+import "martini_water.lt"
+
+water = new MARTINIWATER[80788]
+
+write_once("Data Boundary") {
+  0 210 xlo xhi
+  0 210 ylo yhi
+  0 210 zlo zhi
+}

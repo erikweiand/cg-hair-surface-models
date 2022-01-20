@@ -1,0 +1,13 @@
+# load general settings
+include         "system.in.init"
+
+# load topology files
+read_data	"fatty_acids.data"
+read_data 	"graphene.data" add append
+read_data 	"sodium.data" add append
+
+# load force field parameters and groups
+include         "system.in.settings"
+
+# write full data file
+write_data  	"hair_surface.data"

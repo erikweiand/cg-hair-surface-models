@@ -1,0 +1,20 @@
+# load general settings
+include         system.in.init
+
+# load topology
+read_data       water_box.data
+
+# load force field parameters and groups
+include         system.in.settings
+
+# additional group definitions
+group 		mobile subtract all Cgraphene
+
+# trajectory dump settings (optional)
+#dump            1 all custom 100 traj_min.lammpstrj id mol type x y z ix iy iz
+# set print timestep and perform energy minimization
+thermo 1
+minimize 	0 1e-8 10000 10000
+
+# write full data file (required for subsequent NVT runs!)
+write_data  	system_after_min.data

@@ -1,0 +1,16 @@
+tolerance  3.0
+seed       13515
+
+# output file type
+filetype xyz
+
+# output file name
+output system.xyz
+
+# also possible to decrease the box size, 
+# equilibrate and then replicate in x,y,z before
+# extracting droplets. Dens=1043k/m3 for pol. MARTINI.
+structure water.xyz
+  number 80788
+  inside box  1.0  1.0  1.0 209.0 209.0 209.0
+end structure

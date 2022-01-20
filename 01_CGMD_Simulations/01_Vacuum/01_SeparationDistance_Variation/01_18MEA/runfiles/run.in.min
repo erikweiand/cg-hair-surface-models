@@ -1,0 +1,30 @@
+# load general settings
+include         "system.in.init"
+
+# load topology
+read_data       "hair_surface.data"
+
+# load force field parameters and groups
+include         "system.in.settings"
+
+# additional group definitions
+group 		mobile subtract all Cgraphene
+
+# trajectory dump settings (optional)
+#dump            1 all custom 100 traj_min.lammpstrj id mol type x y z ix iy iz
+
+# reflecting boundary conditions in z direction
+fix 		zwalls all wall/reflect zlo 0 zhi 60
+
+# exclude ghost graphene bead interactions
+neigh_modify	exclude type 4 9
+
+# freeze graphene beads
+fix 		freezeC Cgraphene setforce 0.0 0.0 0.0
+
+# set print timestep and perform energy minimization
+thermo 		1
+minimize 	0 1e-8 10000 10000
+
+# write full data file (required for subsequent NVT runs!)
+write_data  	system_after_min.data

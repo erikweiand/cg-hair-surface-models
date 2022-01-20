@@ -1,0 +1,50 @@
+# load general settings
+include         "system.in.init"
+
+# load topology
+read_data       "system_after_min.data"		# comment for restarting
+#read_restart	"restart.*.nvt"			# uncomment for restarting
+
+# load force field parameters and groups
+include         "system.in.settings"
+
+# additional group definitions
+group		mobile subtract all Cgraphene
+
+# trajectory dump settings
+dump            1 all custom ${Ndump} traj_nvt.lammpstrj id mol type x y z ix iy iz
+
+# reflecting boundary conditions in z direction
+fix 		zwalls all wall/reflect zlo 0 zhi 250
+
+# exclude ghost graphene bead interactions
+neigh_modify 	exclude type 4 9
+
+# constrain polarizable molecule bonds
+fix 		fxshake water shake 0.0001 20 1000 b 2
+
+# Nose-Hoover thermostatting
+fix 		fxnvt mobile nvt temp 298.15 298.15 1000.0
+
+# compute temperature for mobile beads only (excluding graphene)
+compute 	tempMobile mobile temp
+
+# compute pressure based on mobile temperature (not too meaningful)
+compute 	pressMobile all pressure tempMobile
+
+# correct thermostatting for mobile beads
+fix_modify 	fxnvt temp tempMobile
+
+# set console output and frequency
+thermo_style    custom step c_tempMobile pe etotal c_pressMobile vol epair #ebond eangle edihed
+thermo          100
+
+# write intermediate (binary) restart files
+restart		${Nrestart} restart.*.nvt
+
+# set timestep and integrate
+timestep        ${ts}
+run		${Nrun} upto
+
+# write full data file
+write_data  	system_after_nvt.data

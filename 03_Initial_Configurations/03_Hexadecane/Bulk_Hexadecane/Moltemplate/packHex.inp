@@ -1,0 +1,13 @@
+tolerance  3.0
+seed       4346
+
+# output file type
+filetype xyz
+
+# output file name
+output system.xyz
+
+structure hexadecane.xyz
+  number 2048
+  inside box  0.0  0.0  0.0  100 100 100
+end structure

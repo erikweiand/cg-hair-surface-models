@@ -1,0 +1,84 @@
+# Force field parameters and molecule/atom groups
+# E. Weiand - 01/2022
+
+# Bead type assigment:
+# 1: C1 (lipid chain)
+# 2: C5 (lipid base)
+# 3: P5 (amine/carboxyl)
+# 4: C1 (graphene)
+# 5: C1 (hexadecane)
+# 6: unused
+# 7: Qd (sodium counterion with 1st hydration shell)
+# 8: currently unused (placeholder for polarizable ions)
+# 9: ghost beads for grafting lipids onto graphene
+# 10: C1 (lipid terminal bead)
+# 11: Qa (cysteic acid)
+
+# group definitions
+group Cgraphene type 4 9
+group fattyAcid type 1 2 3 10 11
+group hex     type 5
+group sodium	type 7
+
+# Coulombic interactions
+pair_coeff * *  coul/long
+
+# lipid interactions
+pair_coeff 1 1  lj/gromacs 0.8359606382000 4.7 	# C1-C1: IV
+pair_coeff 1 2  lj/gromacs 0.7404222795000 4.7 	# C1-C5: V
+pair_coeff 1 3  lj/gromacs 0.4776917933000 4.7 	# C1-P5: VIII
+pair_coeff 1 4  lj/gromacs 0.8359606382000 4.7 	# C1-C1: IV
+pair_coeff 2 2  lj/gromacs 0.8359606382000 4.7 	# C5-C5: IV
+pair_coeff 2 3  lj/gromacs 0.7404222795000 4.7 	# C5-P5: V
+pair_coeff 2 4  lj/gromacs 0.7404222795000 4.7 	# C5-C1: V
+pair_coeff 3 3  lj/gromacs 1.3375370210000 4.7 	# P5-P5: O
+pair_coeff 3 4  lj/gromacs 0.4776917933000 4.7 	# P5-C1: VIII
+pair_coeff 4 4  lj/gromacs 0.8359606382000 4.7 	# C1-C1: IV
+
+# hexadecane self-interactions
+pair_coeff 5 5  lj/gromacs 0.8359606382000 4.7  # C1-C1: IV
+
+# sodium self-interactions
+pair_coeff 7 7  lj/gromacs 0.8359606382000 4.7	# Qd-Qd: IV (Yesylevskyy)
+
+# interaction between hexadecane and sodium
+pair_coeff 5 7  lj/gromacs 0.5493455622000 4.7  # Qd-C1: VII effectively
+
+# central hexadecane bead interactions with other beads
+pair_coeff 1 5  lj/gromacs 0.8359606382000 4.7  # C1-C1: IV
+pair_coeff 2 5  lj/gromacs 0.7404222795000 4.7  # C1-C5: V
+pair_coeff 3 5  lj/gromacs 0.4776917933000 4.7  # C1-P5: VIII
+pair_coeff 4 5  lj/gromacs 0.8359606382000 4.7  # C1-C1: IV
+
+# sodium interactions with other beads
+pair_coeff 1 7  lj/gromacs 0.5493455622000 4.7	# Qd-C1: VII effectively
+pair_coeff 2 7  lj/gromacs 0.8359606382000 4.7	# Qd-C5: IV effectively
+pair_coeff 3 7  lj/gromacs 1.3375370210000 4.7	# Qd-P5: O effectively
+pair_coeff 4 7  lj/gromacs 0.5493455622000 4.7	# Qd-C1: VIII effectively
+
+# FA tailgroup interactions (C1/C2)
+pair_coeff 1 10  lj/gromacs 0.8359606382000     4.7     # C1-C1: IV
+pair_coeff 2 10  lj/gromacs 0.7404222795000     4.7     # C1-C5: V
+pair_coeff 3 10  lj/gromacs 0.4776917933000     4.7     # P5-C1: VIII
+pair_coeff 4 10  lj/gromacs 0.8359606382000     4.7     # C1-C1: IV
+pair_coeff 5 10  lj/gromacs 0.8359606382000     4.7     # C1-C1: IV
+pair_coeff 7 10  lj/gromacs 0.5493455622000     4.7     # Qd-C1: VII effectively
+pair_coeff 10 10 lj/gromacs 0.8359606382000     4.7     # C1-C1: IV
+
+# cysteic acid interactions (Qa) 
+pair_coeff 1 11  lj/gromacs 0.5493455622000	4.7 	# C1-Qa: VII effectively
+pair_coeff 2 11  lj/gromacs 0.8359606382000	4.7 	# C5-Qa: IV effectively
+pair_coeff 3 11  lj/gromacs 1.3375370210000	4.7 	# P5-Qa: O effectively
+pair_coeff 4 11  lj/gromacs 0.5493455622000	4.7 	# C1-Qa: VII effectively
+pair_coeff 5 11  lj/gromacs 0.5493455622000     4.7     # C1-Qa: VII effectively
+pair_coeff 7 11  lj/gromacs 0.9553835865000	4.7	# Qd-Qa: III effectively
+pair_coeff 10 11 lj/gromacs 0.5493455622000	4.7 	# C1-Qa: VII effectively
+pair_coeff 11 11 lj/gromacs 0.8359606382000	4.7 	# Qa-Qa: IV effectively
+
+# bond potentials
+bond_coeff 1              1.4937858508604 4.7 	# lipids/cysteic acid
+bond_coeff 2              1.4937858508604 4.7   # hexadecane
+
+# angle potentials
+angle_coeff 1             2.9875717017208 180	# lipids/cysteic acid
+angle_coeff 2             2.9875717017208 180   # hexadecane

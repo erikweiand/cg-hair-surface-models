@@ -1,0 +1,10 @@
+import "martini_hexadecane.lt"
+
+hexadecane = new HEXADECANE[2048]
+
+write_once("Data Boundary") {
+  0 100.0 xlo xhi
+  0 100.0 ylo yhi
+  0 100.0 zlo zhi
+}
+
