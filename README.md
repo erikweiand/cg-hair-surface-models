@@ -7,7 +7,7 @@ Erik Weiand
 Tribology Group, Imperial College London  
 erik.weiand19@imperial.ac.uk  
 
-This repository contains the relevant files for studying wetting and surface structure of the 18-MEA monolayer on hair by means of coarse-grained molecular simulations (CGMD) in LAMMPS. The corresponding publication preprint can be found at [ChemRxiv](https://doi.org/10.26434/chemrxiv-2021-7jpc1 "ChemRxiv") (last updated 2022/01/24). Please cite this repository using the following DOI:
+This repository contains the relevant files for studying wetting and surface structure of the 18-MEA monolayer on hair by means of coarse-grained molecular simulations (CGMD) in LAMMPS. The corresponding Soft Matter paper can be found at [https://doi.org/10.1039/D1SM01720A](https://doi.org/10.1039/D1SM01720A "https://doi.org/10.1039/D1SM01720A") (last updated 2022/02/04). Please cite this repository using the following DOI:
 
 
 [![DOI](https://zenodo.org/badge/421338855.svg)](https://zenodo.org/badge/latestdoi/421338855)
@@ -30,5 +30,5 @@ Further workflow descriptions are added in *README.txt* files in the subdirector
 Open-source accessibility for the post-processing routines is currently not planned but should not be a great challenge to achieve by transferring the MATLAB scripts to Python/NumPy.
 
 ## References
-[1] E Weiand, JP Ewen, PH Koenig, Y Roiter, SH Page, S Angioletti-Uberti and D Dini, "Coarse-grained molecular models of the surface of hair," *Soft Matter* (In review).  
+[1] E Weiand, JP Ewen, PH Koenig, Y Roiter, SH Page, S Angioletti-Uberti and D Dini, "Coarse-grained molecular models of the surface of hair," *Soft Matter* (2022).  
 [2] DW Cheong, FCH Lim, L Zhang, "Insights into the Structure of Covalently Bound Fatty Acid Monolayers on a Simpliﬁed Model of the Hair Epicuticle from Molecular Dynamics Simulations," *Langmuir* , **28**, 13008-13017 (2012)
