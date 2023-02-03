@@ -23,7 +23,7 @@ The following subdirectories are available at the moment:
 Further workflow descriptions are added in *README.txt* files in the subdirectories and will be merged into this document in the future. For making full use of this repository, the following tools should be accessible to the user:
 - LAMMPS (https://www.lammps.org/)
 - Moltemplate (https://www.moltemplate.org/)
-- packmol (https://www.moltemplate.org/)
+- packmol (https://m3g.github.io/packmol/)
 - MATLAB (https://de.mathworks.com/products/matlab.html)
 - A molecular visualization tool, such as VMD (https://www.ks.uiuc.edu/Research/vmd/)
 
